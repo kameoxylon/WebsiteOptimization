@@ -1,1 +1,3 @@
-Set phone to debug
+1. Minify HTML
+2. Compress
+3. Cache
