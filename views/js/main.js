@@ -378,7 +378,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.style.width="35%";
 
-  pizzaImage.src = "images/pizza.png";
+  pizzaImage.src = "images/pizza-min.png";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -418,42 +418,31 @@ var resizePizzas = function(size) {
         console.log("bug in changeSliderLabel");
     }
   }
-
+    /*
+        Taken from Prof. Cameron's Udacity video https://www.youtube.com/watch?v=C7HqMCCQok4
+    */
   changeSliderLabel(size);
 
-   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
-
-    // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
-    }
-
-    var newSize = sizeSwitcher(size);
-    var dx = (newSize - oldSize) * windowWidth;
-
-    return dx;
-  }
-
-  // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
+      switch (size) {
+          case "1":
+              newWidth = 25;
+              break;
+          case "2":
+              newWidth = 33.3;
+              break;
+          case "3":
+              newWidth = 50;
+              break;
+          default:
+              console.log("bug in sizeSwitcher");
+      }
+
+      var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
+      for (var i = 0; i < randomPizzas.length; i++) {
+          randomPizzas[i].style.width = newWidth + "%";
+      }
   }
 
   changePizzaSizes(size);
@@ -497,14 +486,30 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+/*
+    Changed the calculations to something more simple and less redundant. I noticed the
+    Math.sin function was repeating the same 5 numbers and narrowed it down to a fixed
+    value of 5. Also noticed the pizzasOnScreen were spaced out by ~250px, so I made a 
+    fixed variable as well. Needless to say, its not very responsive....
+*/
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var height = screen.height;
+  var pizzasOnScreen = (height / 250) * 8;
+
+  var items = document.getElementsByClassName('mover');
+
+  var phase = new Array();
+  for (var i = 0; i < 5; i++) {
+      phase[i] = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+  }
+
+  var j = 0;
+  for (i = 0; i < pizzasOnScreen; i++) {
+      j = i % 5;
+      items[i].style.left = items[i].basicLeft + 100 * phase[j] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -527,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza-min.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
