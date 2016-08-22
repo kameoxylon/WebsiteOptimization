@@ -8,7 +8,7 @@
 - Reduced size of pizzeria.jpg and saved it as pizzeriaReduction.jpg then compressed it and saved as pizzeriaReduction-min.jpg
 - Optimized both pizzeriaReduction-min.jpg and profile-pic.jpg
 
-####Part 2: Optimize PageSpeed Insights score and Frames per Second for pizza.html
+####Part 2: Optimize PageSpeed Insights score and Frames per Second for pizza.html and views/js/main.js
 
 - Added meta name="viewport" to pizza.html
 - Minified both style.css and bootstrap.css and included both into pizza.html as an internal source
