@@ -427,6 +427,7 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 	// Removed .querySelector and replaced it with .getElementByClassName to improve performance
 	// created randPizzasLength variable
+   var newWidth;
   function changePizzaSizes(size) {
       switch (size) {
           case "1":
@@ -444,7 +445,7 @@ var resizePizzas = function(size) {
 
       var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 		var randPizzasLength = randomPizzas.length;
-      for (var i = 0; i < randPizzaslength; i++) {
+      for (var i = 0; i < randPizzasLength; i++) {
           randomPizzas[i].style.width = newWidth + "%";
       }
   }
