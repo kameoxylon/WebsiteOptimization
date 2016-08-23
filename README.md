@@ -1,5 +1,10 @@
 ## Website Performance Optimization portfolio project
 
+###How to Open/Run
+
+- Download zip
+- Open index.html onto a web browser (Chrome preferred) 
+
 ####Part 1: Optimize PageSpeed Insights score for index.html
 
 - Async perfmatters.js and analytics.js
@@ -16,3 +21,5 @@
 - Compressed and optimized the size of pizza.jpg and saved it as pizza-min.jpg
 - Fixed the jankiness of pizza size slider found in main.js (421)
 - Fixed the jankiness of scrolling pizzas found in main.js (489)
+- Created new variables and placed them outside of loops to increase performance (429), (464), (534)
+- Removed .querySelector and replaced them with .getElementByClassName and .getElementById (408), (428) 
