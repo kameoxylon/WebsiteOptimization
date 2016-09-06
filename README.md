@@ -1,12 +1,10 @@
-## Website Performance Optimization portfolio project
-
-###How to Open/Run
-
-- Download zip
+# How to Open/Run
+- Download zip and extract.
 - Open index.html onto a web browser (Chrome preferred) 
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+## Project Overview
 
+####Part 1: Optimize PageSpeed Insights score for index.html
 - Async perfmatters.js and analytics.js
 - Moved both css stylesheets to the end of the html body
 - Used WebFont.load to load in the font
@@ -14,7 +12,6 @@
 - Optimized both pizzeriaReduction-min.jpg and profile-pic.jpg
 
 ####Part 2: Optimize PageSpeed Insights score and Frames per Second for pizza.html and views/js/main.js
-
 - Added meta name="viewport" to pizza.html
 - Minified both style.css and bootstrap.css and included both into pizza.html as an internal source
 - Minified main.js and included into pizza.html as an internal source
